@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agrionics Co. | Reconfigurable Edge Systems</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        brand: {
+                            teal: '#0d9488',
+                            'teal-dark': '#0f766e',
+                            orange: '#ea580c',
+                            'orange-dark': '#c2410c',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .grid-bg {
+            background-image: linear-gradient(rgba(13, 148, 136, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(13, 148, 136, 0.05) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        /* --- NEW ANIMATION STYLES --- */
+        /* Smooth Scroll Reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Subtle Hover Glows for Cards */
+        .glow-hover {
+            transition: box-shadow 0.4s ease, border-color 0.4s ease, transform 0.4s ease;
+        }
+        .dark .glow-hover:hover {
+            box-shadow: 0 0 25px rgba(13, 148, 136, 0.15);
+            border-color: rgba(13, 148, 136, 0.5);
+            transform: translateY(-2px);
+        }
+        .light .glow-hover:hover {
+            box-shadow: 0 4px 20px rgba(13, 148, 136, 0.1);
+            border-color: rgba(13, 148, 136, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* Tiny pulsing light effect */
+        .pulse-light {
+            box-shadow: 0 0 12px rgba(13, 148, 136, 0.8);
+        }
+        .pulse-light-orange {
+            box-shadow: 0 0 12px rgba(234, 88, 12, 0.8);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-50 font-sans transition-colors duration-300 min-h-screen flex flex-col">
+
+    <header class="sticky top-0 z-50 w-full border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-950/80 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 bg-brand-teal rounded flex flex-wrap p-1 gap-0.5 justify-center items-center glow-hover">
+                    <div class="w-2 h-2 bg-slate-950 dark:bg-white rounded-sm"></div>
+                    <div class="w-2 h-2 bg-brand-orange rounded-sm"></div>
+                    <div class="w-2 h-2 bg-slate-950 dark:bg-white rounded-sm"></div>
+                    <div class="w-2 h-2 bg-slate-950 dark:bg-white rounded-sm"></div>
+                </div>
+                <span class="font-mono text-xl font-bold tracking-tight">Agrionics <span class="text-brand-teal">Co.</span></span>
+            </div>
+
+            <nav class="hidden md:flex items-center gap-8 font-medium text-sm">
+                <a href="./index.html" class="text-brand-teal border-b-2 border-brand-teal px-1 py-5">Home</a>
+                <a href="./products.html" class="text-slate-600 dark:text-slate-300 hover:text-brand-teal transition-colors py-5">Products</a>
+                <a href="./portfolio.html" class="text-slate-600 dark:text-slate-300 hover:text-brand-teal transition-colors py-5">Portfolio</a>
+                <a href="./services.html" class="text-slate-600 dark:text-slate-300 hover:text-brand-teal transition-colors py-5">Services</a>
+                <a href="./about.html" class="text-slate-600 dark:text-slate-300 hover:text-brand-teal transition-colors py-5">About</a>
+                <a href="./contact.html" class="text-slate-600 dark:text-slate-300 hover:text-brand-teal transition-colors py-5">Contact</a>
+            </nav>
+
+            <div class="flex items-center gap-4">
+                <button id="theme-toggle" class="p-2 rounded-lg border border-slate-200 dark:border-slate-800 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-900 transition-colors">
+                    <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 2.293a1 1 0 011.414 0l.707.707a1 1 0 01-1.414 1.414l-.707-.707a1 1 0 010-1.414zm2.121 4.414a1 1 0 010 1.414l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-2.293 4a1 1 0 010 1.414l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 0zM11 17a1 1 0 10-2 0v1a1 1 0 102 0v-1zm-4.293-2.293a1 1 0 010-1.414l.707-.707a1 1 0 011.414 1.414l-.707.707a1 1 0 01-1.414 0zM4 11a1 1 0 100-2H3a1 1 0 100 2h1zm2.293-4.293a1 1 0 010-1.414l.707-.707a1 1 0 011.414 1.414l-.707.707a1 1 0 01-1.414 0zM10 5a5 5 0 100 10 5 5 0 000-10z"></path></svg>
+                    <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+                </button>
+                <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg border border-slate-200 dark:border-slate-800 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-900">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                </button>
+            </div>
+        </div>
+
+        <div id="mobile-menu" class="hidden md:hidden border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 px-4 pt-2 pb-4 space-y-2 font-medium text-base">
+            <a href="./index.html" class="block text-brand-teal bg-slate-100 dark:bg-slate-900 rounded px-3 py-2">Home</a>
+            <a href="./products.html" class="block text-slate-600 dark:text-slate-300 hover:text-brand-teal px-3 py-2">Products</a>
+            <a href="./portfolio.html" class="block text-slate-600 dark:text-slate-300 hover:text-brand-teal px-3 py-2">Portfolio</a>
+            <a href="./services.html" class="block text-slate-600 dark:text-slate-300 hover:text-brand-teal px-3 py-2">Services</a>
+            <a href="./about.html" class="block text-slate-600 dark:text-slate-300 hover:text-brand-teal px-3 py-2">About</a>
+            <a href="./contact.html" class="block text-slate-600 dark:text-slate-300 hover:text-brand-teal px-3 py-2">Contact</a>
+        </div>
+    </header>
+
+    <main class="flex-grow">
+        <section class="relative overflow-hidden border-b border-slate-200 dark:border-slate-800 grid-bg py-24 lg:py-32">
+            <canvas id="network-canvas" class="absolute inset-0 w-full h-full opacity-40 dark:opacity-20 pointer-events-none z-0"></canvas>
+            
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center reveal">
+                <div class="lg:col-span-7 space-y-6">
+                    <div class="inline-flex items-center gap-2 border border-brand-teal/30 bg-brand-teal/5 text-brand-teal px-3 py-1 rounded-full text-xs font-mono font-semibold uppercase tracking-wider glow-hover">
+                        <span class="w-2 h-2 rounded-full bg-brand-teal animate-pulse pulse-light"></span> Flagship Node Operational
+                    </div>
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-none text-slate-900 dark:text-white">
+                        Reconfigurable Edge Systems for <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-teal to-emerald-400">African Agriculture</span>
+                    </h1>
+                    <p class="text-lg text-slate-600 dark:text-slate-400 max-w-2xl">
+                        Building ultra-low-power, solar-harvesting, FPGA-accelerated edge systems designed specifically to operate completely off-grid in challenging rural environments.
+                    </p>
+                    <div class="flex flex-wrap gap-4 pt-2">
+                        <a href="./products.html" class="bg-brand-teal hover:bg-brand-teal-dark text-white text-sm font-semibold px-6 py-3 rounded shadow transition-all transform hover:-translate-y-0.5 glow-hover">Explore Products</a>
+                        <a href="./portfolio.html" class="bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-900 dark:text-white text-sm font-semibold px-6 py-3 rounded transition-all glow-hover">View Case Study</a>
+                        <a href="https://github.com/sincerelystepper/AgriGuard-RES-Reconfigurable-Edge-Sentinel-" target="_blank" class="border border-slate-300 dark:border-slate-700 hover:border-brand-teal text-sm font-mono px-4 py-3 rounded flex items-center gap-2 transition-all glow-hover">
+                            <span>git clone repo</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="lg:col-span-5 relative reveal" style="transition-delay: 0.2s;">
+                    <div class="border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 rounded-xl p-6 shadow-2xl relative overflow-hidden font-mono text-xs text-slate-400 glow-hover">
+                        <div class="absolute top-0 right-0 p-2 text-[10px] text-brand-orange font-bold uppercase tracking-widest bg-brand-orange/10 rounded-bl border-l border-b border-slate-800">
+                            <span class="inline-block w-1.5 h-1.5 bg-brand-orange rounded-full mr-1 animate-pulse pulse-light-orange"></span>6-Layer PCB Stackup
+                        </div>
+                        <div class="border-b border-slate-200 dark:border-slate-800 pb-4 mb-4 flex items-center justify-between">
+                            <span class="text-slate-900 dark:text-white font-bold text-sm">AGRI-RES-V1.X.SCH</span>
+                            <span class="w-2 h-2 rounded-full bg-emerald-500 pulse-light"></span>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="bg-slate-50 dark:bg-slate-950 p-3 rounded border border-slate-200 dark:border-slate-800 flex justify-between items-center transition-colors hover:border-brand-teal/50">
+                                <span class="text-brand-teal font-bold">[MCU Core]</span>
+                                <span class="text-[11px]">STM32H743IIT6 ARM Cortex-M7</span>
+                            </div>
+                            <div class="flex justify-center my-1 text-brand-orange animate-pulse" style="text-shadow: 0 0 8px rgba(234, 88, 12, 0.5);">⬇ 400MB/s Parallel Bus ⬇</div>
+                            <div class="bg-slate-50 dark:bg-slate-950 p-3 rounded border border-slate-200 dark:border-slate-800 flex justify-between items-center transition-colors hover:border-brand-orange/50">
+                                <span class="text-brand-orange font-bold">[FPGA Fabric]</span>
+                                <span class="text-[11px]">Lattice iCE40HX8K-CB132</span>
+                            </div>
+                            <div class="flex justify-center my-1 text-slate-500">⬇ SPI / Hardware Interconnect ⬇</div>
+                            <div class="bg-slate-50 dark:bg-slate-950 p-3 rounded border border-slate-200 dark:border-slate-800 flex justify-between items-center transition-colors hover:border-emerald-500/50">
+                                <span class="text-emerald-500 font-bold">[RF Transceiver]</span>
+                                <span class="text-[11px]">Semtech SX1262 LoRa (868/915 MHz)</span>
+                            </div>
+                        </div>
+                        <div class="mt-4 pt-4 border-t border-slate-200 dark:border-slate-800 flex justify-between text-[11px]">
+                            <span>Deep Sleep: <b class="text-emerald-400">&lt;45 µA</b></span>
+                            <span>Harvesting: <b class="text-brand-orange">Solar / MPPT</b></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-20 bg-white dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 reveal">
+                <div class="text-center max-w-3xl mx-auto space-y-4">
+                    <h2 class="text-3xl font-bold tracking-tight text-slate-900 dark:text-white">The Reconfigurable Edge Sentinel (RES) Platform</h2>
+                    <p class="text-slate-600 dark:text-slate-400">
+                        A modular family of ultra-low-power, infrastructure-independent embedded systems built to deploy advanced hardware capabilities where networks and grid power do not exist.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
+                    <div class="border border-slate-200 dark:border-slate-800 p-8 rounded-lg bg-slate-50 dark:bg-slate-900/50 hover:border-brand-teal/50 transition-colors glow-hover reveal" style="transition-delay: 0.1s;">
+                        <div class="w-12 h-12 rounded bg-brand-teal/10 flex items-center justify-center text-brand-teal mb-6 font-mono text-xl font-bold">01</div>
+                        <h3 class="text-xl font-semibold mb-3 text-slate-900 dark:text-white">Co-Processing Matrix</h3>
+                        <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                            Combines the architectural efficiency of an STM32H7 microcontroller with a Lattice iCE40 FPGA. Offload intensive filtering, acoustic analysis, and DSP routines directly to silicon.
+                        </p>
+                    </div>
+                    <div class="border border-slate-200 dark:border-slate-800 p-8 rounded-lg bg-slate-50 dark:bg-slate-900/50 hover:border-brand-teal/50 transition-colors glow-hover reveal" style="transition-delay: 0.2s;">
+                        <div class="w-12 h-12 rounded bg-brand-orange/10 flex items-center justify-center text-brand-orange mb-6 font-mono text-xl font-bold">02</div>
+                        <h3 class="text-xl font-semibold mb-3 text-slate-900 dark:text-white">Off-Grid LoRa Topology</h3>
+                        <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                            Long-range telemetry engineered around Semtech SX1262 transceivers. Optimized layouts, custom helical matching networks, and robust codebases ensure packet tracking across extreme distances.
+                        </p>
+                    </div>
+                    <div class="border border-slate-200 dark:border-slate-800 p-8 rounded-lg bg-slate-50 dark:bg-slate-900/50 hover:border-brand-teal/50 transition-colors glow-hover reveal" style="transition-delay: 0.3s;">
+                        <div class="w-12 h-12 rounded bg-emerald-500/10 flex items-center justify-center text-emerald-500 mb-6 font-mono text-xl font-bold">03</div>
+                        <h3 class="text-xl font-semibold mb-3 text-slate-900 dark:text-white">Aggressive Power Controls</h3>
+                        <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                            Designed explicitly for smallholder configurations. Solar energy harvesting utilizing high-efficiency MPPT matching paired with rigorous hardware line isolation to drop deep sleep currents below 50 µA.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-20 bg-slate-50 dark:bg-slate-900/30">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 reveal">
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+                    <div>
+                        <h2 class="text-3xl font-bold tracking-tight text-slate-900 dark:text-white">Product Architecture Family</h2>
+                        <p class="text-slate-600 dark:text-slate-400 mt-2">Shared HDL building blocks and firmware core deployed across highly targeted sensor variants.</p>
+                    </div>
+                    <a href="./products.html" class="text-brand-teal hover:text-brand-teal-dark font-semibold text-sm inline-flex items-center gap-2 group whitespace-nowrap glow-hover p-2 rounded">
+                        View Product Datasheets <span class="transform group-hover:translate-x-1 transition-transform">→</span>
+                    </a>
+                </div>
+
+                <div class="border border-slate-200 dark:border-slate-800 rounded-lg overflow-hidden bg-white dark:bg-slate-950 shadow-xl glow-hover">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left font-mono text-xs border-collapse">
+                            <thead>
+                                <tr class="bg-slate-100 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 uppercase tracking-wider text-[11px]">
+                                    <th class="p-4 font-semibold">Product Variant</th>
+                                    <th class="p-4 font-semibold">Primary Industrial Application</th>
+                                    <th class="p-4 font-semibold">Hardware Extensions</th>
+                                    <th class="p-4 font-semibold">Deployment Status</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-200 dark:divide-slate-800 text-slate-600 dark:text-slate-300">
+                                <tr class="hover:bg-slate-50 dark:hover:bg-slate-900/40 transition-colors">
+                                    <td class="p-4 font-bold text-sm text-brand-teal font-sans">AgriGuard-RES</td>
+                                    <td class="p-4 font-sans text-xs">Crop health, soil diagnostics, dynamic acoustic pest profiling.</td>
+                                    <td class="p-4">Soil array, acoustic mic arrays, environmental telemetry.</td>
+                                    <td class="p-4"><span class="bg-teal-500/10 text-teal-500 border border-teal-500/20 px-2 py-0.5 rounded text-[10px] uppercase font-bold">In Progress (Flagship)</span></td>
+                                </tr>
+                                <tr class="hover:bg-slate-50 dark:hover:bg-slate-900/40 transition-colors">
+                                    <td class="p-4 font-bold text-sm text-slate-900 dark:text-white font-sans">TrackGuard-RES</td>
+                                    <td class="p-4 font-sans text-xs">Livestock vectors, structural assets, operational geofencing.</td>
+                                    <td class="p-4">GNSS Engine, IMU array, motion signature extraction.</td>
+                                    <td class="p-4"><span class="bg-brand-orange/10 text-brand-orange border border-brand-orange/20 px-2 py-0.5 rounded text-[10px] uppercase font-bold">Early Design / Planning</span></td>
+                                </tr>
+                                <tr class="hover:bg-slate-50 dark:hover:bg-slate-900/40 transition-colors">
+                                    <td class="p-4 font-bold text-sm text-slate-900 dark:text-white font-sans">EnvGuard-RES</td>
+                                    <td class="p-4 font-sans text-xs">Microclimatic disaster detection, wildfire tracking, frost warnings.</td>
+                                    <td class="p-4">Advanced meteorological instrumentation, smoke array.</td>
+                                    <td class="p-4"><span class="bg-slate-500/10 text-slate-400 border border-slate-700 px-2 py-0.5 rounded text-[10px] uppercase font-bold">Concept Vector</span></td>
+                                </tr>
+                                <tr class="hover:bg-slate-50 dark:hover:bg-slate-900/40 transition-colors">
+                                    <td class="p-4 font-bold text-sm text-slate-900 dark:text-white font-sans">AquaGuard-RES</td>
+                                    <td class="p-4 font-sans text-xs">Aquaculture telemetry array and chemical water safety analysis.</td>
+                                    <td class="p-4">Isolated pH probes, Dissolved Oxygen, Turbidity interfaces.</td>
+                                    <td class="p-4"><span class="bg-slate-500/10 text-slate-400 border border-slate-700 px-2 py-0.5 rounded text-[10px] uppercase font-bold">Concept Vector</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 py-12 font-mono text-xs text-slate-500 dark:text-slate-400">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="flex items-center gap-3">
+                <span class="font-bold text-slate-900 dark:text-white font-sans">Agrionics Co.</span>
+                <span>|</span>
+                <span>Robust Infrastructure-Independent Infrastructure</span>
+            </div>
+            <div class="flex items-center gap-6">
+                <a href="https://github.com/sincerelystepper/AgriGuard-RES-Reconfigurable-Edge-Sentinel-" target="_blank" class="hover:text-brand-teal transition-colors">GitHub Repository</a>
+                <span>Location: <span class="text-slate-900 dark:text-slate-300 font-sans">Maseru / Cape Town</span></span>
+            </div>
+            <div class="text-[11px]">
+                &copy; 2026 Agrionics Co. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Responsive Menu Module 
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        if (mobileMenuBtn && mobileMenu) {
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        }
+
+        // Persistent Theme Configuration Script
+        const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+        const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+        
+        if (localStorage.getItem('color-theme') === 'light' || (!('color-theme' in localStorage) && !window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.remove('dark');
+            if (themeToggleDarkIcon) themeToggleDarkIcon.classList.remove('hidden');
+        } else {
+            document.documentElement.classList.add('dark');
+            if (themeToggleLightIcon) themeToggleLightIcon.classList.remove('hidden');
+        }
+
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        if (themeToggleBtn) {
+            themeToggleBtn.addEventListener('click', function() {
+                themeToggleDarkIcon.classList.toggle('hidden');
+                themeToggleLightIcon.classList.toggle('hidden');
+
+                if (localStorage.getItem('color-theme')) {
+                    if (localStorage.getItem('color-theme') === 'light') {
+                        document.documentElement.classList.add('dark');
+                        localStorage.setItem('color-theme', 'dark');
+                    } else {
+                        document.documentElement.classList.remove('dark');
+                        localStorage.setItem('color-theme', 'light');
+                    }
+                } else {
+                    if (document.documentElement.classList.contains('dark')) {
+                        document.documentElement.classList.remove('dark');
+                        localStorage.setItem('color-theme', 'light');
+                    } else {
+                        document.documentElement.classList.add('dark');
+                        localStorage.setItem('color-theme', 'dark');
+                    }
+                }
+            });
+        }
+
+        // --- NEW ANIMATION LOGIC ---
+
+        // 1. Scroll Reveals via Intersection Observer
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target); 
+                }
+            });
+        }, {
+            root: null,
+            threshold: 0.15,
+            rootMargin: "0px 0px -50px 0px"
+        });
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // 2. Background Canvas Data Nodes Animation
+        const canvas = document.getElementById('network-canvas');
+        if (canvas) {
+            const ctx = canvas.getContext('2d');
+            let width, height;
+            let particles = [];
+            const particleCount = 40; 
+            const connectionDistance = 140;
+            const speed = 0.25;
+
+            function resizeCanvas() {
+                width = canvas.width = window.innerWidth;
+                height = canvas.height = canvas.parentElement.offsetHeight;
+            }
+
+            class Particle {
+                constructor() {
+                    this.x = Math.random() * width;
+                    this.y = Math.random() * height;
+                    this.vx = (Math.random() - 0.5) * speed;
+                    this.vy = (Math.random() - 0.5) * speed;
+                    this.radius = Math.random() * 1.5 + 0.5;
+                }
+                update() {
+                    this.x += this.vx;
+                    this.y += this.vy;
+                    if (this.x < 0 || this.x > width) this.vx *= -1;
+                    if (this.y < 0 || this.y > height) this.vy *= -1;
+                }
+                draw() {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                    const isDark = document.documentElement.classList.contains('dark');
+                    ctx.fillStyle = isDark ? 'rgba(13, 148, 136, 0.6)' : 'rgba(15, 118, 110, 0.4)';
+                    ctx.fill();
+                }
+            }
+
+            function initParticles() {
+                particles = [];
+                for (let i = 0; i < particleCount; i++) {
+                    particles.push(new Particle());
+                }
+            }
+
+            function animateCanvas() {
+                ctx.clearRect(0, 0, width, height);
+                const isDark = document.documentElement.classList.contains('dark');
+                const lineColor = isDark ? '13, 148, 136' : '15, 118, 110';
+
+                for (let i = 0; i < particles.length; i++) {
+                    particles[i].update();
+                    particles[i].draw();
+
+                    for (let j = i + 1; j < particles.length; j++) {
+                        const dx = particles[i].x - particles[j].x;
+                        const dy = particles[i].y - particles[j].y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+
+                        if (distance < connectionDistance) {
+                            ctx.beginPath();
+                            ctx.strokeStyle = `rgba(${lineColor}, ${0.5 * (1 - distance / connectionDistance)})`;
+                            ctx.lineWidth = 0.5;
+                            ctx.moveTo(particles[i].x, particles[i].y);
+                            ctx.lineTo(particles[j].x, particles[j].y);
+                            ctx.stroke();
+                        }
+                    }
+                }
+                requestAnimationFrame(animateCanvas);
+            }
+
+            window.addEventListener('resize', () => {
+                resizeCanvas();
+                initParticles();
+            });
+
+            resizeCanvas();
+            initParticles();
+            animateCanvas();
+        }
+    </script>
+</body>
+</html>
