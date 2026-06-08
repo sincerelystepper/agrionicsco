@@ -346,28 +346,25 @@
         });
         revealElements.forEach(el => revealObserver.observe(el));
 
-        // 2. Background Canvas Data Nodes Animation
+// 2. Background Canvas Animation
         const canvas = document.getElementById('network-canvas');
         if (canvas) {
             const ctx = canvas.getContext('2d');
             let width, height;
             let particles = [];
-            const particleCount = 40; 
-            const connectionDistance = 140;
-            const speed = 0.25;
-
-            function resizeCanvas() {
-                width = canvas.width = window.innerWidth;
-                height = canvas.height = canvas.parentElement.offsetHeight;
-            }
+            
+            // INCREASED THESE VALUES FOR DENSITY
+            const particleCount = 120; 
+            const connectionDistance = 200; 
+            const speed = 0.5;
 
             class Particle {
                 constructor() {
-                    this.x = Math.random() * width;
-                    this.y = Math.random() * height;
+                    this.x = Math.random() * window.innerWidth;
+                    this.y = Math.random() * 800;
                     this.vx = (Math.random() - 0.5) * speed;
                     this.vy = (Math.random() - 0.5) * speed;
-                    this.radius = Math.random() * 1.5 + 0.5;
+                    this.radius = Math.random() * 2 + 1.5;
                 }
                 update() {
                     this.x += this.vx;
@@ -378,17 +375,20 @@
                 draw() {
                     ctx.beginPath();
                     ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-                    const isDark = document.documentElement.classList.contains('dark');
-                    ctx.fillStyle = isDark ? 'rgba(13, 148, 136, 0.6)' : 'rgba(15, 118, 110, 0.4)';
+                    // Increased base opacity to 0.9 for higher visibility
+                    ctx.fillStyle = document.documentElement.classList.contains('dark') ? 'rgba(13, 148, 136, 0.9)' : 'rgba(15, 118, 110, 0.8)';
                     ctx.fill();
                 }
             }
 
+            function resizeCanvas() {
+                width = canvas.width = window.innerWidth;
+                height = canvas.height = canvas.parentElement.offsetHeight;
+            }
+
             function initParticles() {
                 particles = [];
-                for (let i = 0; i < particleCount; i++) {
-                    particles.push(new Particle());
-                }
+                for (let i = 0; i < particleCount; i++) particles.push(new Particle());
             }
 
             function animateCanvas() {
@@ -399,16 +399,15 @@
                 for (let i = 0; i < particles.length; i++) {
                     particles[i].update();
                     particles[i].draw();
-
                     for (let j = i + 1; j < particles.length; j++) {
                         const dx = particles[i].x - particles[j].x;
                         const dy = particles[i].y - particles[j].y;
                         const distance = Math.sqrt(dx * dx + dy * dy);
-
                         if (distance < connectionDistance) {
                             ctx.beginPath();
-                            ctx.strokeStyle = `rgba(${lineColor}, ${0.5 * (1 - distance / connectionDistance)})`;
-                            ctx.lineWidth = 0.5;
+                            // Increased line opacity and width for prominence
+                            ctx.strokeStyle = `rgba(${lineColor}, ${1.0 * (1 - distance / connectionDistance)})`;
+                            ctx.lineWidth = 1.5; 
                             ctx.moveTo(particles[i].x, particles[i].y);
                             ctx.lineTo(particles[j].x, particles[j].y);
                             ctx.stroke();
@@ -418,11 +417,7 @@
                 requestAnimationFrame(animateCanvas);
             }
 
-            window.addEventListener('resize', () => {
-                resizeCanvas();
-                initParticles();
-            });
-
+            window.addEventListener('resize', resizeCanvas);
             resizeCanvas();
             initParticles();
             animateCanvas();
