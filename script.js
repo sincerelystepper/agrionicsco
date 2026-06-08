@@ -1,4 +1,18 @@
 document.addEventListener('DOMContentLoaded', () => {
+
+
+    // Responsive Menu Module
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    if (mobileMenuBtn && mobileMenu) {
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+    }
+
+    // Persistent Theme Configuration Script (Ensure you keep your existing toggle logic)
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
     
     // ==========================================
     // 1. Dark Mode / Light Mode Toggle Logic
