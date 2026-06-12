@@ -19,6 +19,15 @@
             }
         }
     </script>
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fadeIn {
+            animation: fadeIn 0.25s ease-out forwards;
+        }
+    </style>
 </head>
 <body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-50 font-sans transition-colors duration-300 min-h-screen flex flex-col">
 
@@ -65,44 +74,37 @@
             <p class="text-slate-600 dark:text-slate-400 mt-2 max-w-3xl">Leverage specialized R&D expertise to bring low-power, robust hardware node platforms and custom RTL pipelines from concept to reality.</p>
         </div>
 
-        <!-- 3x2 Matrix Layout for Service Blocks -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-            <!-- Package 1 -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
             <div class="border border-slate-200 dark:border-slate-800 rounded-lg p-6 bg-white dark:bg-slate-900 space-y-4">
                 <div class="w-10 h-10 rounded bg-brand-teal/10 flex items-center justify-center text-brand-teal"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 5h10a2 2 0 012 2v10a2 2 0 01-2 2H7a2 2 0 01-2-2V7a2 2 0 012-2z"></path></svg></div>
                 <h3 class="text-lg font-bold text-slate-900 dark:text-white">Embedded Systems Design</h3>
                 <p class="text-xs text-slate-500 leading-relaxed">Full schematic design and multi-layer high-density PCB layout (KiCad) with strict focus on signal integrity, BOM matching, and thermal stability.</p>
             </div>
 
-            <!-- Package 2 -->
             <div class="border border-slate-200 dark:border-slate-800 rounded-lg p-6 bg-white dark:bg-slate-900 space-y-4">
                 <div class="w-10 h-10 rounded bg-brand-orange/10 flex items-center justify-center text-brand-orange"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg></div>
                 <h3 class="text-lg font-bold text-slate-900 dark:text-white">Reconfigurable Computing</h3>
                 <p class="text-xs text-slate-500 leading-relaxed">Custom Verilog/VHDL HDL blocks engineered for Lattice iCE40 or Xilinx fabrics, providing real-time filtering and DSP sensor capabilities at the hardware level.</p>
             </div>
 
-            <!-- Package 3 -->
             <div class="border border-slate-200 dark:border-slate-800 rounded-lg p-6 bg-white dark:bg-slate-900 space-y-4">
                 <div class="w-10 h-10 rounded bg-emerald-500/10 flex items-center justify-center text-emerald-500"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg></div>
                 <h3 class="text-lg font-bold text-slate-900 dark:text-white">LoRa & IoT Infrastructure</h3>
                 <p class="text-xs text-slate-500 leading-relaxed">Off-grid deployment topology optimizing SX1262 transceivers, solar-powered energy harvesting networks, and long-range off-grid links.</p>
             </div>
 
-            <!-- Package 4 -->
             <div class="border border-slate-200 dark:border-slate-800 rounded-lg p-6 bg-white dark:bg-slate-900 space-y-4">
                 <div class="w-10 h-10 rounded bg-slate-500/10 flex items-center justify-center text-slate-400"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg></div>
                 <h3 class="text-lg font-bold text-slate-900 dark:text-white">Agritech Sensor Integration</h3>
                 <p class="text-xs text-slate-500 leading-relaxed">Deployment-ready soil arrays, acoustic monitoring blocks, and weather instrumentation pipelines tied to robust, low-power industrial SDKs.</p>
             </div>
 
-            <!-- Package 5 -->
             <div class="border border-slate-200 dark:border-slate-800 rounded-lg p-6 bg-white dark:bg-slate-900 space-y-4">
                 <div class="w-10 h-10 rounded bg-slate-500/10 flex items-center justify-center text-slate-400"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 100-6 3 3 0 000 6z"></path></svg></div>
                 <h3 class="text-lg font-bold text-slate-900 dark:text-white">RF Waveguide Optimization</h3>
                 <p class="text-xs text-slate-500 leading-relaxed">Impedance matching networks, high-gain antenna adjustments, and specific layout rules to isolate low-noise channels from microcontrollers.</p>
             </div>
 
-            <!-- Package 6 -->
             <div class="border border-slate-200 dark:border-slate-800 rounded-lg p-6 bg-white dark:bg-slate-900 space-y-4">
                 <div class="w-10 h-10 rounded bg-slate-500/10 flex items-center justify-center text-slate-400"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg></div>
                 <h3 class="text-lg font-bold text-slate-900 dark:text-white">Academic R&D Support</h3>
@@ -110,7 +112,108 @@
             </div>
         </div>
 
-        <!-- Commercial Pricing Tier Structures Matrix -->
+        <div class="mb-16">
+            <h3 class="text-xl font-bold tracking-tight text-slate-900 dark:text-white mb-6 font-mono">// SILICON_IP_CORES</h3>
+            <div class="border border-brand-teal rounded-lg bg-white dark:bg-slate-900 transition-all duration-300 shadow-sm hover:shadow-md dark:shadow-none">
+                <button id="ip-core-trigger" class="w-full flex items-center justify-between p-6 text-left focus:outline-none select-none group">
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 rounded bg-brand-teal/10 flex items-center justify-center text-brand-teal group-hover:bg-brand-teal/20 transition-colors">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3h6M9 21h6M3 9v6M21 9v6M5 5h14v14H5V5z"></path></svg>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-slate-900 dark:text-white group-hover:text-brand-teal transition-colors">Soft IP Cores & Reusable Modules</h4>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Synthesizable, silicon-optimized IP pipelines designed to handle intense edge processing workloads directly in hardware.</p>
+                        </div>
+                    </div>
+                    <div id="ip-core-arrow" class="text-slate-400 dark:text-slate-500 transform transition-transform duration-300">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </div>
+                </button>
+
+                <div id="ip-core-content" class="hidden border-t border-slate-200 dark:border-slate-800 p-6 bg-slate-50/50 dark:bg-slate-950/30 space-y-6 animate-fadeIn">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-200 dark:border-slate-800 pb-4">
+                        <div>
+                            <span class="inline-block bg-brand-orange/10 text-brand-orange font-mono text-[10px] font-bold px-2 py-0.5 rounded uppercase mb-1.5">Product Asset (AES-CORE)</span>
+                            <h5 class="text-xl font-bold text-slate-900 dark:text-white">Ultra-Low-Power PDM-to-PCM Acoustic DSP Core</h5>
+                        </div>
+                        <div>
+                            <a href="https://github.com/sincerelystepper/agrionicsco" target="_blank" class="inline-flex items-center gap-2 bg-slate-900 hover:bg-slate-800 dark:bg-slate-100 dark:hover:bg-slate-200 text-white dark:text-slate-900 text-xs font-mono py-2 px-4 rounded transition-colors font-medium">
+                                Inspect Suite Public Files &rarr;
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        <div class="space-y-4">
+                            <div>
+                                <h6 class="text-xs font-mono uppercase tracking-wider text-brand-teal font-bold">// PRODUCT_OVERVIEW</h6>
+                                <p class="text-sm text-slate-600 dark:text-slate-400 mt-2 leading-relaxed">
+                                    A fully verified, synthesizable SystemVerilog IP core designed for ultra-low-power edge devices. It offloads raw sigma-delta modulated PDM microphone streams from the host processor, delivering high-fidelity, downsampled PCM audio data via hardware-accelerated parallel decimation filters.
+                                </p>
+                            </div>
+                            <div>
+                                <h6 class="text-xs font-mono uppercase tracking-wider text-brand-teal font-bold">// TARGET_APPLICATIONS</h6>
+                                <div class="mt-2 grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm text-slate-600 dark:text-slate-400">
+                                    <div class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-brand-orange"></span> IoT Acoustic Monitoring</div>
+                                    <div class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-brand-orange"></span> Edge AI Keyword Spotting</div>
+                                    <div class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-brand-orange"></span> Structural Health Monitoring</div>
+                                    <div class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-brand-orange"></span> Bioacoustic Pest Detection</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-slate-100/70 dark:bg-slate-900/50 p-5 rounded border border-slate-200 dark:border-slate-800 space-y-3">
+                            <h6 class="text-xs font-mono uppercase tracking-wider text-brand-orange font-bold">// TECHNICAL_SPECIFICATIONS</h6>
+                            <div class="space-y-2 font-mono text-xs text-slate-600 dark:text-slate-400">
+                                <div class="flex justify-between border-b border-slate-200 dark:border-slate-800/60 pb-1">
+                                    <span class="text-slate-400 dark:text-slate-500">Input Modality:</span>
+                                    <span class="text-slate-900 dark:text-slate-200 font-bold">1-bit Sigma-Delta PDM stream up to 4.8 MHz</span>
+                                </div>
+                                <div class="flex justify-between border-b border-slate-200 dark:border-slate-800/60 pb-1">
+                                    <span class="text-slate-400 dark:text-slate-500">Output Format:</span>
+                                    <span class="text-slate-900 dark:text-slate-200 font-bold">16-bit or 24-bit parallel/serial PCM data</span>
+                                </div>
+                                <div class="flex justify-between border-b border-slate-200 dark:border-slate-800/60 pb-1">
+                                    <span class="text-slate-400 dark:text-slate-500">Decimation Architecture:</span>
+                                    <span class="text-slate-900 dark:text-slate-200 font-bold">3-Stage CIC Filter with 64:1 to 128:1 downsampling loop</span>
+                                </div>
+                                <div class="flex justify-between border-b border-slate-200 dark:border-slate-800/60 pb-1">
+                                    <span class="text-slate-400 dark:text-slate-500">Latency Envelope:</span>
+                                    <span class="text-brand-teal font-bold">Sub-100 microseconds processing time</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-slate-400 dark:text-slate-500">Silicon Footprint:</span>
+                                    <span class="text-slate-900 dark:text-slate-200 font-bold">Optimized for low-density FPGAs (e.g., Lattice iCE40)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="border-t border-slate-200 dark:border-slate-800 pt-4">
+                        <h6 class="text-xs font-mono uppercase tracking-wider text-brand-teal font-bold mb-3">// DELIVERABLES_PACKAGE</h6>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                            <div class="p-3 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded">
+                                <div class="text-xs font-mono font-bold text-slate-900 dark:text-white mb-1">Synthesizable RTL</div>
+                                <p class="text-[11px] text-slate-500 dark:text-slate-400 leading-normal">Production-ready SystemVerilog source files (.sv).</p>
+                            </div>
+                            <div class="p-3 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded">
+                                <div class="text-xs font-mono font-bold text-slate-900 dark:text-white mb-1">Verification Bed</div>
+                                <p class="text-[11px] text-slate-500 dark:text-slate-400 leading-normal">Self-checking testbench (tb_pdm_decimator.sv) for simulation pipelines.</p>
+                            </div>
+                            <div class="p-3 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded">
+                                <div class="text-xs font-mono font-bold text-slate-900 dark:text-white mb-1">Waveform Baselines</div>
+                                <p class="text-[11px] text-slate-500 dark:text-slate-400 leading-normal">Gold-standard configurations (.vcd / GTKWave runtime scripts).</p>
+                            </div>
+                            <div class="p-3 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded">
+                                <div class="text-xs font-mono font-bold text-slate-900 dark:text-white mb-1">Timing & Docs</div>
+                                <p class="text-[11px] text-slate-500 dark:text-slate-400 leading-normal">Integration blueprints and physical timing constraint mappings (.pdf).</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <h3 class="text-xl font-bold tracking-tight text-slate-900 dark:text-white mb-6 font-mono">// PROTOTYPING_ESTIMATES_ZAR</h3>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div class="border border-slate-200 dark:border-slate-800 rounded-lg p-6 bg-white dark:bg-slate-900 flex flex-col justify-between">
@@ -226,6 +329,27 @@
         });
 
         revealElements.forEach(el => revealObserver.observe(el));
+
+        // ==========================================
+        // 4. IP Core Accordion Dropdown Logic
+        // ==========================================
+        const ipCoreTrigger = document.getElementById('ip-core-trigger');
+        const ipCoreContent = document.getElementById('ip-core-content');
+        const ipCoreArrow = document.getElementById('ip-core-arrow');
+
+        if (ipCoreTrigger && ipCoreContent && ipCoreArrow) {
+            ipCoreTrigger.addEventListener('click', () => {
+                const isCollapsed = ipCoreContent.classList.contains('hidden');
+                
+                if (isCollapsed) {
+                    ipCoreContent.classList.remove('hidden');
+                    ipCoreArrow.classList.add('rotate-180');
+                } else {
+                    ipCoreContent.classList.add('hidden');
+                    ipCoreArrow.classList.remove('rotate-180');
+                }
+            });
+        }
     });
 </script>
 </body>
