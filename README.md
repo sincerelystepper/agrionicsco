@@ -30,12 +30,3 @@ To maintain an ultra-low footprint and avoid frontend framework bloat, this site
 
 This site utilizes flat architecture. Deployment is fully automated via GitHub Pages.
 
-To update the live site:
-1. Modify the target `.html` or `.js` file locally.
-2. Commit the changes.
-3. Push to the `main` branch.
-
-```bash
-git add .
-git commit -m "Update IP Core specifications"
-git push origin main
