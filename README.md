@@ -30,3 +30,5 @@ To maintain an ultra-low footprint and avoid frontend framework bloat, this site
 
 This site utilizes flat architecture. Deployment is fully automated via GitHub Pages.
 
+
+© 2026 Agrionics Co. All rights reserved. Maseru / Cape Town.
